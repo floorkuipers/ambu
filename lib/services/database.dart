@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ambu/models/scores.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:ambu/models/brew.dart';
@@ -14,6 +15,7 @@ class DatabaseService {
 
   // collection reference
   final CollectionReference users = FirebaseFirestore.instance.collection('users');
+
 
   Future<void> updateUserData(String name) async {
     return await users.doc(uid).set({
@@ -32,16 +34,16 @@ class DatabaseService {
     return snapshot.docs.map((doc){
       //print(doc.data);
       return personalInfo(
-        name: doc.get('name') ?? '',
+        name: doc.get('name') ?? 'Pietje Puk',
       );
     }).toList();
   }
 
-  List<personalInfo> _scoresFromSnapshot(QuerySnapshot snapshot) {
+  List<scoreList> _scoresFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
       //print(doc.data);
-      return personalInfo(
-        scores: doc.get('name') ?? '',
+      return scoreList(
+        scores: doc.get('scores') ?? '',
       );
     }).toList();
   }
@@ -59,17 +61,21 @@ class DatabaseService {
     return users.snapshots()
       .map(_namesFromSnapshot);
   }
-
-//   Stream<UserData> get userData {
-//     return users.doc(uid).snapshots().map(_userDataFromSnapshot);
-//   }
+  Stream<List<scoreList>> get scores {
+    return users.snapshots()
+        .map(_scoresFromSnapshot);
+  }
+  Stream<UserData> get userData {
+    return users.doc(uid).snapshots().map(_userDataFromSnapshot);
+  }
 
   // Future<void> _getUserName() async {
-  //   users.doc((await FirebaseAuth.instance.currentUser!).uid)
-  //       .get()
-  //       .then((value) {
-  //       _userName = value.data['UserName'].toString();
-  //   });}
+
+    // users.doc((await FirebaseAuth.instance.currentUser!).uid)
+    //     .get()
+    //     .then((value) {
+    //     _userName = value.data['UserName'].toString();
+    // });}
 
  }
 
