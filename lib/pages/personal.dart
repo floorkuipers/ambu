@@ -1,3 +1,6 @@
+import 'package:ambu/pages/interactive_videos/training.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ambu/theme/app_theme.dart';
 import 'package:ambu/pages/authenticate/sign_in.dart';
@@ -5,7 +8,13 @@ import 'package:provider/provider.dart';
 import '../models/brew.dart';
 import '../models/user.dart';
 import '../services/database.dart';
-import '../shared/loading.dart';
+
+
+final Stream <DocumentSnapshot> _usersStream = FirebaseFirestore.instance
+    .collection("Users")
+    .doc(FirebaseAuth.instance.currentUser?.uid)
+    .snapshots();
+
 
 class personal extends StatefulWidget {
   const personal({Key? key}) : super(key: key);
@@ -19,21 +28,13 @@ class _personalState extends State<personal> {
   @override
   Widget build(BuildContext context) {
     MyUser user = Provider.of<MyUser>(context);
+    setState(() {});
 
     if(userType.type != ''){hasType == true;};
 
-    return StreamBuilder<List<personalInfo>>(
-      stream: DatabaseService(uid: user.uid).brews,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<personalInfo>? PersonalInfo = snapshot.data;
-          print(PersonalInfo);
           return Scaffold(
             appBar: AppBar(
               leading: Column(children: [
-                BackButton(
-                  color: Colors.white,
-                ),
               ]),
               title: PreferredSize(
                 preferredSize: const Size.fromHeight(480.0),
@@ -41,13 +42,11 @@ class _personalState extends State<personal> {
                   children: [
                     Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(
-                       // hasType?
-                        userType.type
-                            //:
-                        ,
-                        style: TextStyle(fontSize: 24),
-                      ),
+                      child: GetUserName(user.uid),
+                      // child: Text(
+                      //   "data",
+                      //   style: TextStyle(fontSize: 24),
+                      // ),
                     ),
                     Align(
                         alignment: Alignment.bottomRight,
@@ -67,11 +66,7 @@ class _personalState extends State<personal> {
                 fit: BoxFit.cover,
               ),
             ),
-            //body:
           );
-        } else {
-          return Loading();
         }
-      });
-  }
-}
+       }
+

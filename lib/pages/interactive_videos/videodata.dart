@@ -78,7 +78,7 @@ class dataset with ChangeNotifier {
         data[j].score = 1;
       }
     }
-    notifyListeners();
+    //notifyListeners();
   }
 
   void resetAnswers(topic) {

@@ -27,19 +27,10 @@ class training extends StatefulWidget {
 class _trainingState extends State<training> {
   @override
   Widget build(BuildContext context) {
-    MyUser user = Provider.of<MyUser>(context);
 
     final dataset dataSet = new dataset();
     String category = widget.category;
     final List videoTopics = returnTopic(category);
-
-    //  (totalScore([videoTopics[i]]))/totalAmount([videoTopics[i]]);
-    return StreamBuilder<List<scoreList>>(
-        stream: DatabaseService(uid: user.uid).scores,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<scoreList>? ScoreList = snapshot.data;
-
             return Scaffold(
                 appBar: AppBar(
                   leading: Column(children: [
@@ -54,8 +45,8 @@ class _trainingState extends State<training> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            ScoreList,
-                            //category,
+                            //ScoreList,
+                            category,
                             style: TextStyle(fontSize: 24),
                           ),
                         ),
@@ -116,13 +107,11 @@ class _trainingState extends State<training> {
                           }
                         }),
                   ),
-                )));
-          } else {
-            return Loading();
+                ),
+                ));
           }
-        });
   }
-}
+
 
 Widget _buildPopupDialog(BuildContext context) {
   return new AlertDialog(
@@ -144,40 +133,4 @@ Widget _buildPopupDialog(BuildContext context) {
       ),
     ],
   );
-}
-
-class scoresFromDatabase extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    MyUser user = Provider.of<MyUser>(context);
-    Stream<DocumentSnapshot> userStream = FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .snapshots();
-
-    return StreamBuilder<DocumentSnapshot>(
-        stream: userStream,
-        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            // get course document
-            var currentUser = snapshot.data?.data;
-
-            // get sections from the document
-            var sections = currentUser!['scores'];
-
-
-          // build list using names from sections
-            return ListView.builder(
-              itemCount: sections != null ? sections.length : 0,
-              itemBuilder: (_, int index) {
-                print(sections[index]['name']);
-                return ListTile(title: Text(sections[index]['name']));
-              },
-            );
-          } else {
-            return Container();
-          }
-        });
-  }
 }
