@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "315687572435",
+    "project_id": "ambulance-bcdfb",
+    "storage_bucket": "ambulance-bcdfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315687572435:android:480aeef9a98d9e006e1526",
+        "android_client_info": {
+          "package_name": "com.example.ambu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315687572435-jrt1nvj23e89kfeidrkuinkcc22a32t0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyRLErxU-XxSz4PWShxR5iYALIxtle4VM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315687572435-jrt1nvj23e89kfeidrkuinkcc22a32t0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315687572435-bsnp9fukuvfeb4dvsau5cq0cqk6g35vq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.floor343.ambu"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,7 +9,9 @@ import 'package:ambu/pages/homepage.dart';
 
 
 question2(BuildContext context, String topic)  {
+  List actualData = dataset.data;
 
+  final user = Provider.of<MyUser>(context, listen: false);
 
   final dataset dataSet = new dataset();
   showDialog(
@@ -24,7 +26,7 @@ question2(BuildContext context, String topic)  {
             content: Text(data.question),
             actions: [
               TextButton(
-          onPressed: ()  {
+          onPressed: ()  async {
                   data.newVideo = false;
                   data.end? videodata.counter = 1 : videodata.counter++;
                   if(data.correct == 'Answer1'){
@@ -36,10 +38,20 @@ question2(BuildContext context, String topic)  {
                  //   await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 0);
 
                   }
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: data.end == false?
-                          (BuildContext context) => videoPlayerScreen(topic):(BuildContext context) => Homepage()));
-                  //Navigator.of(context).pop();
+                  if(data.end == true){
+                    for (var j = 0; j < actualData.length; j++) {
+                      await DatabaseService(uid: user.uid).initialUpload(actualData[j]);
+                    }
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => Homepage()));
+                  } else{
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) => videoPlayerScreen(topic)));
+                  }
+                  // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  //     builder: data.end == false?
+                  //         (BuildContext context) => videoPlayerScreen(topic):(BuildContext context) => Homepage()));
+                   //Navigator.of(context).pop();
 
                 },
                 child: Text(
@@ -48,7 +60,7 @@ question2(BuildContext context, String topic)  {
                 ),
               ),
               TextButton(
-                onPressed: ()  {
+                onPressed: () async {
                   data.newVideo = false;
                   data.end? videodata.counter = 1:videodata.counter++;
                   Navigator.of(context).pop();
@@ -63,9 +75,16 @@ question2(BuildContext context, String topic)  {
                 //    await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 0);
                   }
 
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: data.end == false?
-                          (BuildContext context) => videoPlayerScreen(topic):(BuildContext context) => Homepage()));
+                  if(data.end == true){
+                    for (var j = 0; j < actualData.length; j++) {
+                      await DatabaseService(uid: user!.uid).initialUpload(actualData[j]);
+                    }
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => Homepage()));
+                  } else{
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => videoPlayerScreen(topic)));
+                  }
                 },
                 child: Text(
                   data.answer2,
@@ -73,7 +92,7 @@ question2(BuildContext context, String topic)  {
                 ),
               ),
               TextButton(
-                onPressed: ()  {
+                onPressed: () async {
                   data.newVideo = false;
                   data.end? videodata.counter = 1:videodata.counter++;
                   Navigator.of(context).pop();
@@ -86,9 +105,16 @@ question2(BuildContext context, String topic)  {
               //      await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 0);
                     dataSet.resetAnswers("$topic$counter");
                   }
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: data.end == false?
-                          (BuildContext context) => videoPlayerScreen(topic):(BuildContext context) => Homepage()));
+                  if(data.end == true){
+                    for (var j = 0; j < actualData.length; j++) {
+                      await DatabaseService(uid: user!.uid).initialUpload(actualData[j]);
+                    }
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => Homepage()));
+                  } else{
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => videoPlayerScreen(topic)));
+                  }
                 },
                 child: Text(
                   data.answer3,

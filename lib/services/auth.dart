@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ambu/models/user.dart';
 import 'package:ambu/services/database.dart';
+import 'package:ambu/pages/interactive_videos/videodata.dart';
 
-
+List data = dataset.data;
 
 class AuthService {
 
@@ -26,6 +27,9 @@ class AuthService {
       UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
       await DatabaseService(uid: user!.uid).updateUserData('Pietje Puk');
+    for (var j = 0; j < data.length; j++) {
+      await DatabaseService(uid: user!.uid).initialUpload(data[j]);
+     }
       return _userFromFirebaseUser(user!);
     } catch (e) {
       print(e.toString());
@@ -52,6 +56,9 @@ class AuthService {
       User? user = result.user;
       // create a new document for the user with the uid
       await DatabaseService(uid: user!.uid).updateUserData(name);
+      for (var j = 0; j < data.length; j++) {
+        await DatabaseService(uid: user!.uid).initialUpload(data[j]);
+      }
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());

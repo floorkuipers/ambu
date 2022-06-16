@@ -46,10 +46,13 @@ dependencies:
   flutter_spinkit: "^4.0.0"
   foundation_flutter: ^0.2.0
   json_annotation: ^4.5.0
+  #firebase_database: ^9.0.15
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: 0.9.2
+  build_runner: ^2.1.11
+  json_serializable: ^6.2.0
 
 flutter_icons:
   android: true
