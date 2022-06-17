@@ -6,7 +6,6 @@ import 'package:ambu/pages/homepage.dart';
 import 'videodata.dart';
 import 'question2.dart';
 
-bool videoPlayer = false;
 
 class videoPlayerScreen extends StatefulWidget {
   String topic;
@@ -17,7 +16,7 @@ class videoPlayerScreen extends StatefulWidget {
 }
 
 class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindingObserver{
-
+  bool videoPlayer = false;
   AppLifecycleState? _notification;
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -49,7 +48,7 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
   int counter = videodata.counter;
   String text = '0';
   final dataset dataSet = new dataset();
-
+  bool test = false;
   void data(){
     topic = widget.topic;
 
@@ -60,6 +59,9 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
     )
       ..addListener(() {
         final bool isPlaying = controller.value.isPlaying;
+        if (controller.value.isPlaying){
+          playing = true;
+        }
         // if (!controller.value.isPlaying && videodata.counter>1) {
         //   controller.play();
         // }
@@ -77,15 +79,50 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
         setState(() {
           _duration = controller.value.duration;
         });
-        if(
-        _duration?.compareTo(_position) == 0){
-          this.setState(() {
-            _isEnd = true;
-          });
-          if(videoPlayer && _notification==null){
+
+        controller.addListener(() {
+          if (!controller.value.isPlaying &&
+              controller.value.position > Duration.zero &&
+              controller.value.position.inSeconds >=
+                  controller.value.duration.inSeconds) {
+            print('this works');
             dataSet.viewedVideo("$topic$counter");
             question2(context, topic);
+            this.setState(() {
+              videoPlayer=false;
+            });
+            // completion
+          }
+        });
+
+        if(
+        _duration.compareTo(_position) == 0){
+
+          if(videoPlayer){
+            print('1');
+            if(playing){
+              print('2');
+              if(_notification==null){
+                print('yes');
+                this.setState(() {
+                  test = true;
+                  _isEnd = true;
+                });
+                print('3');
+                dataSet.viewedVideo("$topic$counter");
+                question2(context, topic);
+                this.setState(() {
+                  videoPlayer=false;
+                });
+              }
+            }
+          }
+          if(videoPlayer && playing && _notification==null){
+            dataSet.viewedVideo("$topic$counter");
+            question2(context, topic);
+            this.setState(() {
             videoPlayer=false;
+            });
           }
         }
         if(_notification != null){
@@ -99,10 +136,13 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
 
   @override
   Widget build(BuildContext context) {
-    print(playing);
     final double _width = MediaQuery.of(context).size.width;
     final double _height = MediaQuery.of(context).size.height;
-    videoPlayer = true;
+    bool videoPlayer = true;
+    print(' test = $test');
+    print('playing $playing' );
+    print(' videoplayer $videoPlayer' );
+    print(_notification);
       return
      Scaffold(
         appBar: AppBar(
@@ -150,7 +190,6 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
                             onPressed: () {
                               if (!controller.value.isPlaying) {
                                 videodata.playing = true;
-                                print('active');
                                 controller.play();
                               } else {
                                 controller.pause();
