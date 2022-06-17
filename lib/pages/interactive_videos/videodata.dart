@@ -17,6 +17,7 @@ const jsonCodec = const JsonCodec();
 class videodata {
   static int counter = 1;
   static int score = 0;
+  static bool playing = false;
 }
 
 

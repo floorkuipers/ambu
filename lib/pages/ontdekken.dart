@@ -78,13 +78,18 @@ class _ontdekkenState extends State<ontdekken> {
                             fontSize: 20,
                           ),
                         )),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget> [
-                        tiles("Saturatie", true, _VHAZ, 'saturation', 4, 100),
-                        tiles("Beademing", true, _VHAZ, 'breathing-mask', 4, 90),
-                        tiles("Zuurstof", true, _VHAZ, 'toedienen-van-zuurstof', 4, 100),
-                      ],
+                    Scrollbar(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget> [
+                          tiles("Saturatie", true, _VHAZ, 'saturation', 4, 100),
+                          tiles("Beademing", true, _VHAZ, 'breathing-mask', 4, 90),
+                          tiles("Zuurstof", true, _VHAZ, 'toedienen-van-zuurstof', 4, 100),
+                        ],
+                      ),
+                      ),
                     )
                   ],
                 ),

@@ -43,25 +43,28 @@ class _personalState extends State<personal> {
     return Scaffold(
       appBar: AppBar(
         leading: Column(children: []),
-        title: PreferredSize(
-          preferredSize: const Size.fromHeight(480.0),
-          child: Row(
-            children: [
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: GetUserName(user.uid),
-                // child: Text(
-                //   "data",
-                //   style: TextStyle(fontSize: 24),
-                // ),
-              ),
-              Align(
-                  alignment: Alignment.bottomRight,
-                  child: Image(
-                      image: ExactAssetImage("images/doctor.png"),
-                      height: 200.0,
-                      alignment: FractionalOffset.bottomRight)),
-            ],
+        title: FittedBox(
+          fit:BoxFit.fitWidth,
+          child: PreferredSize(
+            preferredSize: const Size.fromHeight(480.0),
+            child: Row(
+              children: [
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: GetUserName(user.uid),
+                  // child: Text(
+                  //   "data",
+                  //   style: TextStyle(fontSize: 24),
+                  // ),
+                ),
+                Align(
+                    alignment: Alignment.bottomRight,
+                    child: Image(
+                        image: ExactAssetImage("images/doctor.png"),
+                        height: 200.0,
+                        alignment: FractionalOffset.bottomRight)),
+              ],
+            ),
           ),
         ),
         toolbarHeight: 200,

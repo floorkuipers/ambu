@@ -46,6 +46,8 @@ dependencies:
   flutter_spinkit: "^4.0.0"
   foundation_flutter: ^0.2.0
   json_annotation: ^4.5.0
+  shared_preferences: ^0.5.4+6
+
   #firebase_database: ^9.0.15
 dev_dependencies:
   flutter_test:
@@ -55,9 +57,9 @@ dev_dependencies:
   json_serializable: ^6.2.0
 
 flutter_icons:
-  android: true
+  android: "launcher_icon"
   ios: true
-  image path: "images/app_logo.png"
+  image_path: "images/app_logo.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -78,6 +80,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+     - images/app_logo.png
      - images/saturation.jpg
      - images/tension-pneumothorax.jpg
      - images/toedienen-van-zuurstof.jpg

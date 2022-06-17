@@ -16,7 +16,7 @@ class Homepage extends StatefulWidget {
   }
 }
 
-class _HomepageState extends State {
+class _HomepageState extends State<Homepage>{
   int _currentIndex = 0;
   String _title = 'Ontdekken';
   final AuthService _auth = AuthService();
@@ -26,10 +26,7 @@ class _HomepageState extends State {
     personal()
     //PlaceholderWidget(Colors.purple)
   ];
-  // @override
-  // initState(){
-  //   _title = 'Ontdekken';
-  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

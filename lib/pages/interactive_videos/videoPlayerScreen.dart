@@ -16,7 +16,28 @@ class videoPlayerScreen extends StatefulWidget {
   _videoPlayerScreenState createState() => _videoPlayerScreenState();
 }
 
-class _videoPlayerScreenState extends State<videoPlayerScreen> {
+class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindingObserver{
+
+  AppLifecycleState? _notification;
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    setState(() {
+      _notification = state;
+    });
+  }
+  @override
+  void initState() {
+    data();
+    WidgetsBinding.instance?.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
+  }
+
   late VideoPlayerController controller;
   bool _isEnd = false;
   bool _isPlaying = false;
@@ -24,6 +45,7 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> {
   Duration _position = Duration(seconds: 0);
   dynamic _video= 'temporary';
   String topic = 'temporary';
+  bool playing = videodata.playing;
   int counter = videodata.counter;
   String text = '0';
   final dataset dataSet = new dataset();
@@ -60,24 +82,24 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> {
           this.setState(() {
             _isEnd = true;
           });
-          if(videoPlayer){
+          if(videoPlayer && _notification==null){
             dataSet.viewedVideo("$topic$counter");
             question2(context, topic);
             videoPlayer=false;
           }
         }
+        if(_notification != null){
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => Homepage()));
+        }
       })
-      ..initialize();
+      ..initialize().then((value) => controller.play());
   }
-  @override
-  void initState() {
-    data();
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
-
+    print(playing);
     final double _width = MediaQuery.of(context).size.width;
     final double _height = MediaQuery.of(context).size.height;
     videoPlayer = true;
@@ -127,6 +149,8 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> {
                         IconButton(
                             onPressed: () {
                               if (!controller.value.isPlaying) {
+                                videodata.playing = true;
+                                print('active');
                                 controller.play();
                               } else {
                                 controller.pause();

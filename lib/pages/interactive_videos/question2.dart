@@ -20,8 +20,7 @@ question2(BuildContext context, String topic)  {
       builder: (BuildContext context) {
         int counter = videodata.counter;
         MyExcelTable data = returnData('$topic$counter');
-        return Expanded(
-          child: AlertDialog(
+        return AlertDialog(
             title: Text(data.questionTitle),
             content: Text(data.question),
             actions: [
@@ -122,7 +121,6 @@ question2(BuildContext context, String topic)  {
                 ),
               ),
             ],
-          ),
-        );
+         );
       });
 }

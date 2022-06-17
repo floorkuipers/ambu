@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:ambu/pages/initialrouting.dart';
 import 'package:ambu/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:ambu/models/user.dart';
 import 'package:ambu/pages/homepage.dart';
 import 'package:ambu/pages/wrapper.dart';
+import 'package:ambu/pages/initialrouting.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 void main() async{
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<MyUser>.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: Wrapper(),
+        home: SplashScreen(),
       ),
     );
   }
