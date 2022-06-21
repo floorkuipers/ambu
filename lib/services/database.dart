@@ -8,9 +8,29 @@ import 'package:ambu/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:json_annotation/json_annotation.dart';
-//import 'package:firebase_database/firebase_database.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 import '../shared/loading.dart';
+
+List videos = [];
+
+// getDataFromDatabase() async {
+//   var value = FirebaseDatabase.instance.ref();
+//   var getValue = await value.child('users').once();
+//   return getValue;
+// }
+
+CollectionReference _collectionRef =
+FirebaseFirestore.instance.collection('users');
+Future<void> getData() async {
+  // Get docs from collection reference
+  QuerySnapshot querySnapshot = await _collectionRef.get();
+  // Get data from docs and convert map to List
+  final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+  print(allData);
+}
+
+
+
 
 Future<MyExcelTable> initialLoad2(uid) async {
 MyExcelTable table = MyExcelTable("category", "video", "questionTitle", "question", "answer1", "answer2", "answer3", "correct", true, true,0);
@@ -61,8 +81,8 @@ Future<void> initialLoad(uid) async {
    }
   //});
   );
-  print(videos[0]);
 }
+
 class DatabaseService {
   final String uid;
 
@@ -80,6 +100,45 @@ class DatabaseService {
         );
   }
 
+  Future getData2() async{
+    var collection = FirebaseFirestore.instance.collection('users');
+    var docSnapshot = await collection.doc(uid).get();
+    var dataExcel;
+    String category = "Coniotomie";
+    List topics = returnVid(category);
+    List tables = [];
+    if (docSnapshot.exists) {
+      Map<String, dynamic>? data = docSnapshot.data();
+      for (int i = 0; i < topics.length; i++) {
+        // tables.add(data?['videos'][category][topics[i]]["questions"]);
+        var temp = data?['videos'][category][topics[i]]["questions"];
+        tables.add(MyExcelTable.fromJson(temp));
+      }
+      return tables;
+    }
+  }
+
+  Future updateLocal() async{
+    final dataset dataSet = new dataset();
+    List data = dataset.data;
+    var databaseData = await getData2();
+    for (int i = 0; i < data.length; i++) {
+      if(databaseData[i].newVideo == false){
+        dataSet.viewedVideo(data[i].video);
+      }
+
+      if (data[i].video == databaseData[i].video) {
+        if(data[i].score < databaseData[i].score){
+          dataSet.correctAnswer(data[i].video);
+          print(data[i].video);
+        }
+        else{
+          print('up to date');
+        }
+      }
+
+    }
+  }
   Future<void> updateUserData(String name) async {
     return await users.doc(uid).set({
       'name': name,

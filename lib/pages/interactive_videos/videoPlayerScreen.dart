@@ -85,7 +85,6 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
               controller.value.position > Duration.zero &&
               controller.value.position.inSeconds >=
                   controller.value.duration.inSeconds) {
-            print('this works');
             dataSet.viewedVideo("$topic$counter");
             question2(context, topic);
             this.setState(() {
@@ -95,36 +94,16 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
           }
         });
 
-        if(
-        _duration.compareTo(_position) == 0){
-
-          if(videoPlayer){
-            print('1');
-            if(playing){
-              print('2');
-              if(_notification==null){
-                print('yes');
-                this.setState(() {
-                  test = true;
-                  _isEnd = true;
-                });
-                print('3');
-                dataSet.viewedVideo("$topic$counter");
-                question2(context, topic);
-                this.setState(() {
-                  videoPlayer=false;
-                });
-              }
-            }
-          }
-          if(videoPlayer && playing && _notification==null){
-            dataSet.viewedVideo("$topic$counter");
-            question2(context, topic);
-            this.setState(() {
-            videoPlayer=false;
-            });
-          }
-        }
+        // if(
+        // _duration.compareTo(_position) == 0){
+        //   if(videoPlayer && _notification==null){
+        //     dataSet.viewedVideo("$topic$counter");
+        //     question2(context, topic);
+        //     this.setState(() {
+        //     videoPlayer=false;
+        //     });
+        //   }
+        // }
         if(_notification != null){
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => Homepage()));
@@ -139,9 +118,6 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
     final double _width = MediaQuery.of(context).size.width;
     final double _height = MediaQuery.of(context).size.height;
     bool videoPlayer = true;
-    print(' test = $test');
-    print('playing $playing' );
-    print(' videoplayer $videoPlayer' );
     print(_notification);
       return
      Scaffold(
@@ -217,7 +193,6 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
                     ),
                   ),
                 ])
-
         ),
       ],
     ));

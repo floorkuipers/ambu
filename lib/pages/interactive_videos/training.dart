@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ambu/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import '../../shared/loading.dart';
+import '../homepage.dart';
 import 'videodata.dart';
 import 'videoPlayerScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,9 +35,19 @@ class _trainingState extends State<training> {
             return Scaffold(
                 appBar: AppBar(
                   leading: Column(children: [
-                    BackButton(
-                      color: Colors.white,
-                    ),
+                    // BackButton(
+                    //   color: Colors.white,
+                    // ),
+                  IconButton(
+                  icon: const Icon(
+                  Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => Homepage()));
+                    },
+                ),
                   ]),
                   title: PreferredSize(
                     preferredSize: const Size.fromHeight(480.0),

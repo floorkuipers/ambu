@@ -1,4 +1,7 @@
+import 'package:ambu/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/user.dart';
 import 'homepage.dart';
 import 'package:ambu/theme/app_theme.dart';
 import 'tiles.dart';
@@ -21,11 +24,14 @@ class _ontdekkenState extends State<ontdekken> {
 
   @override
   Widget build(BuildContext context) {
+    MyUser user = Provider.of<MyUser>(context);
+    DatabaseService(uid: user.uid).updateLocal();
     String category = 'Coniotomie';
     double progress;
     double score;
     if(totalAmount(returnTopic(category)) > 0 && getProgress(returnTopic(category))>0){
-      progress = (getProgress(returnTopic(category))/(totalAmount(returnTopic(category))+1))*100;
+
+      progress = (getProgress(returnTopic(category))/(totalAmount(returnTopic(category))))*100;
       score = ((totalScore(returnTopic(category)))/getProgress(returnTopic(category)))*5;
     } else{
       score = 0;

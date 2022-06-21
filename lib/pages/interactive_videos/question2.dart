@@ -10,10 +10,6 @@ import 'package:ambu/pages/homepage.dart';
 
 
 question2(BuildContext context, String topic)  {
-  List actualData = dataset.data;
-
-  final user = Provider.of<MyUser>(context, listen: false);
-
   final dataset dataSet = new dataset();
   showDialog(
       barrierDismissible: false,
@@ -21,34 +17,25 @@ question2(BuildContext context, String topic)  {
       builder: (BuildContext context) {
         int counter = videodata.counter;
         MyExcelTable data = returnData('$topic$counter');
-        return AlertDialog(
+          return data.end!=true ? AlertDialog(
             title: Text(data.questionTitle),
             content: Text(data.question),
             actions: [
               TextButton(
           onPressed: ()  async {
                   data.newVideo = false;
-                  data.end? videodata.counter = 1 : videodata.counter++;
+                  //data.end? videodata.counter = 1 :
+                  videodata.counter++;
                   if(data.correct == 'Answer1'){
                     dataSet.correctAnswer("$topic$counter");
-               //     await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 1);
                   }
                   else{
                     dataSet.resetAnswers("$topic$counter");
-                 //   await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 0);
                   }
-                  if(data.end == true){
-                    for (var j = 0; j < actualData.length; j++) {
-                      await DatabaseService(uid: user.uid).initialUpload(actualData[j]);
-                    }
-                    Navigator.pop(context);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => training(data.category)));
-                  } else{
                     Navigator.pop(context);
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (BuildContext context) => videoPlayerScreen(topic)));
-                  }
+                 // }
                  },
                 child: Text(
                   data.answer1,
@@ -58,28 +45,17 @@ question2(BuildContext context, String topic)  {
               TextButton(
                 onPressed: () async {
                   data.newVideo = false;
-                  data.end? videodata.counter = 1 : videodata.counter++;
+                  videodata.counter++;
                   if(data.correct == 'Answer2'){
                     dataSet.correctAnswer("$topic$counter");
-                    //     await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 1);
                   }
                   else{
                     dataSet.resetAnswers("$topic$counter");
-                    //   await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 0);
                   }
-
-                  if(data.end == true){
-                    for (var j = 0; j < actualData.length; j++) {
-                      await DatabaseService(uid: user.uid).initialUpload(actualData[j]);
-                    }
-                    Navigator.pop(context);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => training(data.category)));
-                  } else{
                     Navigator.pop(context);
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (BuildContext context) => videoPlayerScreen(topic)));
-                  }
+                 // }
                 },
                 child: Text(
                   data.answer2,
@@ -89,27 +65,17 @@ question2(BuildContext context, String topic)  {
               TextButton(
                 onPressed: () async {
                   data.newVideo = false;
-                  data.end? videodata.counter = 1 : videodata.counter++;
+                  videodata.counter++;
                   if(data.correct == 'Answer3'){
                     dataSet.correctAnswer("$topic$counter");
-                    //     await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 1);
                   }
                   else{
                     dataSet.resetAnswers("$topic$counter");
-                    //   await DatabaseService(uid: user!.uid).updateScore(topic, data.video, 0);
                   }
-                  if(data.end == true){
-                    for (var j = 0; j < actualData.length; j++) {
-                      await DatabaseService(uid: user.uid).initialUpload(actualData[j]);
-                    }
-                    Navigator.pop(context);
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => training(data.category)));
-                  } else{
                     Navigator.pop(context);
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (BuildContext context) => videoPlayerScreen(topic)));
-                  }
+                 // }
                 },
                 child: Text(
                   data.answer3,
@@ -117,6 +83,41 @@ question2(BuildContext context, String topic)  {
                 ),
               ),
             ],
-         );
+         ):
+          //TODO insert alertdialog for final question
+          _lastVideo(context, topic);
+
       });
+}
+
+Widget _lastVideo(BuildContext context, topic) {
+  final user = Provider.of<MyUser>(context, listen: false);
+  int counter = videodata.counter;
+  MyExcelTable data = returnData('$topic$counter');
+  List actualData = dataset.data;
+  int score = totalScore([topic]);
+  return new AlertDialog(
+    title: const Text('Training klaar'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text('Deze videotraining is afgerond. Je score is $score'),
+      ],
+    ),
+    actions: <Widget>[
+      new TextButton(
+        onPressed: () async {
+          videodata.counter = 1;
+            for (var j = 0; j < actualData.length; j++) {
+              await DatabaseService(uid: user.uid).initialUpload(actualData[j]);
+            }
+            Navigator.pop(context);
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => training(data.category)));
+          },
+        child: const Text('Training afsluiten'),
+      ),
+    ],
+  );
 }

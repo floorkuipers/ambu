@@ -1,3 +1,4 @@
+import 'package:ambu/pages/welcomepage.dart';
 import 'package:flutter/material.dart';
 import 'ontdekken.dart';
 import 'placeholder_widget.dart';
@@ -22,7 +23,7 @@ class _HomepageState extends State<Homepage>{
   final AuthService _auth = AuthService();
   final List _children = [
     ontdekken(),    //PlaceholderWidget(Colors.white),
-    PlaceholderWidget(Colors.purple),
+  //  PlaceholderWidget(Colors.purple),
     personal()
     //PlaceholderWidget(Colors.purple)
   ];
@@ -42,10 +43,10 @@ class _HomepageState extends State<Homepage>{
             icon: Icon(Icons.auto_stories_outlined),
             label: 'Ontdekken',
           ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
-            label: 'Overzicht',
-          ),
+          // new BottomNavigationBarItem(
+          //   icon: Icon(Icons.library_books),
+          //   label: 'Overzicht',
+          // ),
           new BottomNavigationBarItem(
               icon: Icon(Icons.manage_accounts_outlined),
               label: 'Profiel'
@@ -93,32 +94,40 @@ class _HomepageState extends State<Homepage>{
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xff3FB9F9),
               ),
-              child: Text(
-                  'Drawer Header',
-                //TODO text color
-              ),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Navigator.pop(context);
-                // readExcel("Coniotomie", 1);
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Image.asset('images/app_logo.png'),
+                    iconSize: 50,
+                    onPressed: () { },
+                  ),
+                  Text(
+                    //TODO titel app
+                    'Ambu app',
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ],
+              )
 
-              },
             ),
+            // ListTile(
+            //   title: const Text('Account',
+            //     style: TextStyle(fontSize: 18, color: Color(0xff53617D)),
+            //   ),
+            //   onTap: () {
+            //     Navigator.of(context).push(MaterialPageRoute(
+            //         builder: (BuildContext context) => personal()));              },
+            // ),
             ListTile(
-              title: const Text('Item 2'),
+              title: const Text('App info',
+                  style: TextStyle(fontSize: 18, color: Color(0xff53617D))),
               onTap: () {
-                // Update the state of the app.
-                // ...
-                Navigator.pop(context);
-
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => IntroScreen()));
               },
             ),
           ],
@@ -132,9 +141,9 @@ class _HomepageState extends State<Homepage>{
       switch(index) {
         case 0: { _title = 'Ontdekken'; }
         break;
-        case 1: { _title = 'Overzicht'; }
-        break;
-        case 2: { _title = 'Profiel'; }
+        // case 1: { _title = 'Overzicht'; }
+        // break;
+        case 1: { _title = 'Profiel'; }
         break;
         //case 3: { _title = 'Clients'; }
         //break;

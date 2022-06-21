@@ -170,6 +170,16 @@ List returnTopic(category) {
   return outputTopic;
 }
 
+
+List returnVid(category) {
+  List outputTopic = [];
+  for (var j = 0; j < data.length; j++) {
+    if (data[j].category == category) {
+      outputTopic.add(data[j].video);
+    }
+  }
+  return outputTopic;
+}
 Future<Duration> calcDur(String topic) async {
   Duration duration = Duration(seconds: 0);
   for (var i = 0; i < data.length; i++) {
@@ -210,12 +220,13 @@ int totalAmount(List topic) {
   int amount = 0;
   for (var j = 0; j < data.length; j++) {
     for (var i = 0; i < topic.length; i++) {
-      if (data[j].video.contains(topic[i])) {
+      if (data[j].video.contains(topic[i])&&data[j].end ==false) {
         amount++;
       }
     }
   }
-  return amount - 1;
+  //amount = amount-1;
+  return amount;
 }
 
 //what is the number of correctly answered questions? Works for both a single topic as for a whole category
@@ -224,12 +235,13 @@ int totalScore(List topic) {
   int temp;
   for (var j = 0; j < data.length; j++) {
     for (var i = 0; i < topic.length; i++) {
-      if (data[j].video.contains(topic[i]) && data[j].newVideo == false) {
+      if (data[j].video.contains(topic[i]) && data[j].newVideo == false&&data[j].end==false) {
         temp = data[j].score.toInt();
         score += temp;
       }
     }
   }
+  print('score - $score');
   return score;
 }
 
@@ -239,12 +251,13 @@ int getProgress(List topic) {
   for (var i = 0; i < topic.length; i++) {
     for (var j = 0; j < data.length; j++) {
       if (data[j].video.contains(topic[i])) {
-        if (data[j].newVideo == false) {
+        if (data[j].newVideo == false&&data[j].end ==false) {
           progress += 1;
         }
       }
     }
   }
+  print('progress - $progress');
   return progress;
 }
 
@@ -254,7 +267,6 @@ bool emptyVideo(topic) {
     if (data[j].video.contains(topic) && data[j].video.contains('1')) {
       print(data[j].video);
       if (data[j].question.contains('test')) {
-        print('2');
         empty = true;
       }
     }

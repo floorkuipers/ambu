@@ -42,6 +42,8 @@ class AuthService {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
+      await DatabaseService(uid: user!.uid).updateLocal();
+
       return user;
     } catch (error) {
       //print(error.toString());
