@@ -61,7 +61,7 @@ class _SignInState extends State<SignIn> {
                   children: [
                     Padding(
                       padding: EdgeInsets.fromLTRB(50, 50,50,0),
-                      child: Text('Bedankt voor het downloaden van deze app! \n\nHeb je al een account? Dan kun je hieronder inloggen',textAlign: TextAlign.center, style: TextStyle(color: AppTheme.colors.textColor,fontSize: 17),)
+                      child: Text('Heb je al een account? Dan kun je hieronder inloggen',textAlign: TextAlign.center, style: TextStyle(color: AppTheme.colors.textColor,fontSize: 17),)
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),

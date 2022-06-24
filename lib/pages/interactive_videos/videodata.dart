@@ -241,7 +241,6 @@ int totalScore(List topic) {
       }
     }
   }
-  print('score - $score');
   return score;
 }
 
@@ -257,7 +256,6 @@ int getProgress(List topic) {
       }
     }
   }
-  print('progress - $progress');
   return progress;
 }
 

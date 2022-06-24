@@ -22,11 +22,14 @@ class AuthService {
   }
 
   // sign in anon
-  Future signInAnon() async {
+  Future signInAnon(name) async {
+    if(name == ""){
+      name = "Pietje Puk";
+    }
     try {
       UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
-      await DatabaseService(uid: user!.uid).updateUserData('Pietje Puk');
+      await DatabaseService(uid: user!.uid).updateUserData(name);
     for (var j = 0; j < data.length; j++) {
       await DatabaseService(uid: user!.uid).initialUpload(data[j]);
      }

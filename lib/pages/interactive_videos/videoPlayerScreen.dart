@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:ambu/theme/app_theme.dart';
 import 'package:ambu/pages/homepage.dart';
+import '../../models/user.dart';
+import '../../services/database.dart';
 import 'videodata.dart';
 import 'question2.dart';
 
@@ -119,6 +122,8 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<MyUser>(context, listen: false);
+    List actualData = dataset.data;
     videoPlayer = true;
     final double _width = MediaQuery.of(context).size.width;
     final double _height = MediaQuery.of(context).size.height;
@@ -130,10 +135,13 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
           elevation: 0.0,
           iconTheme: IconThemeData(color: AppTheme.colors.primaryColor),
           leading: GestureDetector(
-            onTap: () {
+            onTap: () async {
               controller.pause();
               videodata.counter=1;
               videoPlayer=false;
+              for (var j = 0; j < actualData.length; j++) {
+                await DatabaseService(uid: user.uid).initialUpload(actualData[j]);
+              }
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => Homepage()));},
             child: Icon(

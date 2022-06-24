@@ -30,11 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPageHome() {
+    Navigator.of(context).pop;
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => Wrapper())); //Wrapper
   }
 
   void navigationPageWel() {
+    Navigator.of(context).pop;
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => IntroScreen()));  }
   @override

@@ -1,8 +1,9 @@
 import 'package:ambu/pages/walkthrough.dart';
 import 'package:ambu/pages/wrapper.dart';
 import 'package:flutter/material.dart';
-
+import 'package:ambu/models/appInfo.dart';
 import '../theme/app_theme.dart';
+import 'authenticate/authenticate.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -29,82 +30,92 @@ class IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(fit: StackFit.expand, children: <Widget>[
-          Container(
-            decoration: BoxDecoration(color: AppTheme.colors.primaryColor),
-          ),
-      Container(
-        color: Color(0xFFEEEEEE),
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
-            Expanded(
-              flex: 3,
-              child: PageView(
-                children: <Widget>[
-                  Walkthrough(
-                    // TODO: insert appname
-                    title: "Bedankt voor het downloaden van deze app",
-                    content: "Flutkart.wc1",
-                    imageIcon: Icons.mobile_screen_share,
 
-                  ),
-                  Walkthrough(
-                    title: "Deze app is onderdeel van mijn afstudeerscriptie",
-                    //TODO: schrijf omschrijving van deze app en mijn scriptie
-                    content: "Flutkart.wc2",
-                    imageIcon: Icons.search,
-                  ),
-                  Walkthrough(
-                    title: "Hoe werkt de app?",
-                    //TODO: schrijf uitleg van de app
-                    content: "Flutkart.wc3",
-                    imageIcon: Icons.shopping_cart,
-                  ),
-                  Walkthrough(
-                    title: "Flutkart.wt4",
-                    content: "Flutkart.wc4",
-                    imageIcon: Icons.verified_user,
-                  ),
-                ],
-                controller: controller,
-                onPageChanged: _onPageChanged,
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: TextButton(
-                      child: Text(lastPage ? "Klaar" : "Volgende",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0)),
-                      onPressed: () => lastPage
-                          ? Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) => Wrapper()))
-                          : controller.nextPage(
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.easeIn),
+    return Container(
+      constraints: BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("images/infoschermBolletjes.png"),
+            fit: BoxFit.cover),
+      ),
+      child: Scaffold(
+          body: Stack(fit: StackFit.expand, children: <Widget>[
+               Container(
+                color: Color(0xFFEEEEEE),
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Container(),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      )
-    ]));
+                    Expanded(
+                      flex: 4,
+                      child: PageView(
+                        children: <Widget>[
+                          Walkthrough(
+                            // TODO: insert appname
+                            title: appInfo.bedankt,
+                            content: appInfo.bedanktText,
+                            // imageIcon: Icons.mobile_screen_share,
+
+                          ),
+                          Walkthrough(
+                            title: appInfo.hoe,
+                            content: appInfo.hoeText,
+                            // imageIcon: Icons.search,
+                          ),
+                          Walkthrough(
+                            title: appInfo.gegevens,
+                            content: appInfo.gegevensText,
+                            //   imageIcon: Icons.shopping_cart,
+                          ),
+                          Walkthrough(
+                            title: appInfo.vastlopen,
+                            content: appInfo.vastlopenText,
+                            //  imageIcon: Icons.verified_user,
+                          ),
+                        ],
+                        controller: controller,
+                        onPageChanged: _onPageChanged,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: TextButton(
+                              child: Text(lastPage ? "Klaar" : "Volgende",
+                                  style: TextStyle(
+                                      color: AppTheme.colors.primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0)),
+                              onPressed: () => lastPage
+                                  ?
+                              toHome()
+                                  : controller.nextPage(
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeIn),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+      ),
+      ])),
+    );
+  }
+
+  toHome() {
+    Navigator.of(context).pop;
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => Wrapper()));
   }
 }
