@@ -1,3 +1,4 @@
+import 'package:ambu/pages/authenticate/reset_password.dart';
 import 'package:ambu/services/auth.dart';
 import 'package:ambu/shared/constants.dart';
 import 'package:ambu/shared/loading.dart';
@@ -31,9 +32,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
 
-    return loading
-        ? Loading()
-        : Scaffold(
+    return Scaffold(
             appBar: AppBar(
               leading: IconButton(
                 icon: Image.asset('images/app_logo.png'),
@@ -58,6 +57,8 @@ class _SignInState extends State<SignIn> {
               child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsets.fromLTRB(50, 50,50,0),
@@ -91,7 +92,15 @@ class _SignInState extends State<SignIn> {
                                 setState(() => password = val);
                               },
                             ),
-                            SizedBox(height: 20.0),
+                            TextButton(onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) => resetPassword()));
+                            },
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                                child: const Text('Wachtwoord vergeten?'))
+                            ),
+                            SizedBox(height: 0.0),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(primary: AppTheme.colors.accentColor,),
                                 child: Text(

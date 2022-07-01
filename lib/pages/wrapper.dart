@@ -12,9 +12,9 @@ class Wrapper extends StatelessWidget {
 
     // return either the Home or Authenticate widget
     if (user != null){
-      return Homepage();
+      return WillPopScope(onWillPop: () async => false, child: Homepage());
     } else {
-      return Authenticate();
+      return WillPopScope(onWillPop: () async => false, child: Authenticate());
     }
 
   }

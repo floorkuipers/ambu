@@ -139,9 +139,11 @@ class DatabaseService {
 
     }
   }
-  Future<void> updateUserData(String name) async {
+  Future<void> updateUserData(String name, String year, String geschiedenis) async {
     return await users.doc(uid).set({
       'name': name,
+      'number of years': year,
+      'Geschiedenis': geschiedenis
     });
   }
 

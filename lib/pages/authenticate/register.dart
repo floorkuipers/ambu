@@ -24,6 +24,8 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String name = '';
+  String year = '';
+  String geschiedenis = '';
   String nameAnon = '';
 
   @override
@@ -58,11 +60,38 @@ class _RegisterState extends State<Register> {
                     child: Container(
                         padding: EdgeInsets.symmetric(
                             vertical: 20.0, horizontal: 50.0),
-                        child: Column(children: [
+                        child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
                           Form(
                               key: _formKey,
                               child: Column(children: <Widget>[
                                 SizedBox(height: 20.0),
+                                Text("Hoeveel jaar werk je als verpleegkundige?", textAlign: TextAlign.left, style: TextStyle(fontSize: 15),),
+                                SizedBox(height: 10.0),
+                                TextFormField(
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: 'Aantal jaren'),
+                                  validator: (val) => val!.isEmpty
+                                      ? 'Voer een aantal in'
+                                      : null,
+                                  onChanged: (val) {
+                                    setState(() => year = val);
+                                  },
+                                ),
+                                SizedBox(height: 10.0),
+                                Text("Heb je ooit een cricothyrotomie moeten uitvoeren?", textAlign: TextAlign.left, style: TextStyle(fontSize: 15),),
+                                SizedBox(height: 10.0),
+                                TextFormField(
+                                  decoration: textInputDecoration.copyWith(
+                                      hintText: 'Ja/Nee'),
+                                  validator: (val) => val!.isEmpty
+                                      ? 'Vul "ja" of "nee" in.'
+                                      : null,
+                                  onChanged: (val) {
+                                    setState(() => geschiedenis = val);
+                                  },
+                                ),
+                                SizedBox(height: 40.0),
                                 TextFormField(
                                   decoration: textInputDecoration.copyWith(
                                       hintText: 'Voornaam'),
@@ -73,6 +102,7 @@ class _RegisterState extends State<Register> {
                                     setState(() => name = val);
                                   },
                                 ),
+
                                 SizedBox(height: 20.0),
                                 TextFormField(
                                   decoration: textInputDecoration.copyWith(
@@ -97,7 +127,9 @@ class _RegisterState extends State<Register> {
                                   },
                                 ),
                                 SizedBox(height: 20.0),
-                                RaisedButton(
+                                loading
+                                    ? Loading()
+                                    : RaisedButton(
                                     color: AppTheme.colors.accentColor,
                                     child: Text(
                                       'Registreer',
@@ -108,7 +140,7 @@ class _RegisterState extends State<Register> {
                                         setState(() => loading = true);
                                         dynamic result = await _auth
                                             .registerWithEmailAndPassword(
-                                                email, password, name);
+                                                email, password, name, year, geschiedenis);
                                         if (result == null) {
                                           setState(() {
                                             loading = false;
@@ -125,57 +157,57 @@ class _RegisterState extends State<Register> {
                                       color: Colors.red, fontSize: 14.0),
                                 ),
                               ])),
-                          Form(
-                            key: _formKey2,
-                            child: Column(
-                              children: [
-                                Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      'Anoniem inloggen',
-                                      style: TextStyle(fontSize: 20),
-                                    )),
-                                Text(
-                                    'Je kunt ook inloggen zonder e-mailadres. \nLet op: Als je uitlogt in de app, ben je je gegevens en voortgang kwijt.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: AppTheme.colors.textColor,
-                                        fontSize: 15)),
-                                SizedBox(height: 10.0),
-                                TextFormField(
-                                  decoration: textInputDecoration.copyWith(
-                                      hintText: 'Voornaam'),
-                                  validator: (val) => val!.isEmpty
-                                      ? 'Voer een voornaam in'
-                                      : null,
-                                  onChanged: (val) {
-                                    setState(() => nameAnon = val);
-                                  },
-                                ),
-                                SizedBox(height: 20.0),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: AppTheme
-                                        .colors.accentColor, // Background color
-                                  ),
-                                  child: Text('Anoniem inloggen'),
-                                  onPressed: () async {
-                                    if (_formKey2.currentState!.validate()) {
-                                      setState(() => loading = true);
-                                      dynamic result =
-                                          await _auth.signInAnon(nameAnon);
-                                      if (result == null) {
-                                        setState(() {
-                                          loading = false;
-                                          error = 'Inloggen niet gelukt';
-                                        });
-                                      }
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          )
+                          // Form(
+                          //   key: _formKey2,
+                          //   child: Column(
+                          //     children: [
+                          //       Padding(
+                          //           padding: EdgeInsets.all(10),
+                          //           child: Text(
+                          //             'Anoniem inloggen',
+                          //             style: TextStyle(fontSize: 20),
+                          //           )),
+                          //       Text(
+                          //           'Je kunt ook inloggen zonder e-mailadres. \nLet op: Als je uitlogt in de app, ben je je gegevens en voortgang kwijt.',
+                          //           textAlign: TextAlign.center,
+                          //           style: TextStyle(
+                          //               color: AppTheme.colors.textColor,
+                          //               fontSize: 15)),
+                          //       SizedBox(height: 10.0),
+                          //       TextFormField(
+                          //         decoration: textInputDecoration.copyWith(
+                          //             hintText: 'Voornaam'),
+                          //         validator: (val) => val!.isEmpty
+                          //             ? 'Voer een voornaam in'
+                          //             : null,
+                          //         onChanged: (val) {
+                          //           setState(() => nameAnon = val);
+                          //         },
+                          //       ),
+                          //       SizedBox(height: 20.0),
+                          //       ElevatedButton(
+                          //         style: ElevatedButton.styleFrom(
+                          //           primary: AppTheme
+                          //               .colors.accentColor, // Background color
+                          //         ),
+                          //         child: Text('Anoniem inloggen'),
+                          //         onPressed: () async {
+                          //           if (_formKey2.currentState!.validate()) {
+                          //             setState(() => loading = true);
+                          //             dynamic result =
+                          //                 await _auth.signInAnon(nameAnon);
+                          //             if (result == null) {
+                          //               setState(() {
+                          //                 loading = false;
+                          //                 error = 'Inloggen niet gelukt';
+                          //               });
+                          //             }
+                          //           }
+                          //         },
+                          //       ),
+                          //     ],
+                          //   ),
+                          // )
                         ])))));
   }
 }

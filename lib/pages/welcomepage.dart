@@ -115,7 +115,7 @@ class IntroScreenState extends State<IntroScreen> {
 
   toHome() {
     Navigator.of(context).pop;
-    Navigator.of(context).push(MaterialPageRoute(
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (BuildContext context) => Wrapper()));
   }
 }

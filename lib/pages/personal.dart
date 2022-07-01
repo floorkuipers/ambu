@@ -47,32 +47,28 @@ class _personalState extends State<personal> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Column(children: []),
+       // leading: Column(children: []),
+        leading: Align(
+            alignment: Alignment.bottomRight,
+            child: Image(
+                image: ExactAssetImage("images/doctor.png"),
+                alignment: FractionalOffset.center)), leadingWidth: 250,
         title: FittedBox(
           fit: BoxFit.fitWidth,
           child: PreferredSize(
-            preferredSize: const Size.fromHeight(480.0),
+            preferredSize: const Size.fromHeight(200.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: GetUserName(user.uid),
-                  // child: Text(
-                  //   "data",
-                  //   style: TextStyle(fontSize: 24),
-                  // ),
                 ),
-                Align(
-                    alignment: Alignment.bottomRight,
-                    child: Image(
-                        image: ExactAssetImage("images/doctor.png"),
-                        height: 200.0,
-                        alignment: FractionalOffset.bottomRight)),
               ],
             ),
           ),
         ),
-        toolbarHeight: 200,
+        toolbarHeight: 130,
         backgroundColor: AppTheme.colors.primaryColor,
         elevation: 0.0,
         iconTheme: IconThemeData(color: AppTheme.colors.primaryColor),
@@ -82,61 +78,57 @@ class _personalState extends State<personal> {
         ),
       ),
       //  body: Text(test()),
-      body: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-          //child: ElevatedButton(
-          //   child: Text('test'),
-          //   onPressed: () async {
-          //     // MyExcelTable table = await initialLoad2(user.uid);
-          //
-          //   },
-          // ),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                    child: Text(
-                      "Ervaar je een probleem met de app? Laat het hieronder weten.",
-                      style: TextStyle(fontSize: 17, color: AppTheme.colors.textColor),
-                    )),
-                TextField(
-                  keyboardType: TextInputType.multiline,
-                  minLines: 1,
-                  //Normal textInputField will be displayed
-                  maxLines: 5,
-                  decoration: textInputDecoration.copyWith(
-                      hintText: 'Wat ging er niet goed?'),
-                  onChanged: (val) {
-                    setState(() => bug = val);
-                  },
+      body: Scrollbar(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(0, 50, 0, 30),
+                        child: Text(
+                          "Ervaar je een probleem met de app? Laat het hieronder weten.",
+                          style: TextStyle(fontSize: 17, color: AppTheme.colors.textColor),
+                        )),
+                    TextField(
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 5,
+                      decoration: textInputDecoration.copyWith(
+                          hintText: 'Wat ging er niet goed?'),
+                      onChanged: (val) {
+                        setState(() => bug = val);
+                      },
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: AppTheme.colors.accentColor,
+                          ),
+                          child: Text(
+                            'Verzenden',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () async {
+                            bugcount++;
+                            if (_formKey.currentState!.validate()) {
+                              setState(() => loading = true);
+                                return await users.doc(user.uid).update({
+                                    'bug$bugcount' : bug
+                                });
+                            }
+                          }),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: AppTheme.colors.accentColor,
-                      ),
-                      child: Text(
-                        'Verzenden',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () async {
-                        bugcount++;
-                        if (_formKey.currentState!.validate()) {
-                          setState(() => loading = true);
-                          //dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                            return await users.doc(user.uid).update({
-                                'bug$bugcount' : bug
-                            });
-                        }
-                      }),
-                ),
-              ],
-            ),
-          )
+              )
     ),
+        ),
+      ),
     );
   }
 }
