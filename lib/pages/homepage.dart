@@ -1,3 +1,4 @@
+import 'package:ambu/pages/sources.dart';
 import 'package:ambu/pages/welcomepage.dart';
 import 'package:flutter/material.dart';
 import 'ontdekken.dart';
@@ -128,6 +129,14 @@ class _HomepageState extends State<Homepage>{
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => IntroScreen()));
+              },
+            ),
+            ListTile(
+              title: const Text('Bronnen',
+                  style: TextStyle(fontSize: 18, color: Color(0xff53617D))),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => sources()));
               },
             ),
           ],

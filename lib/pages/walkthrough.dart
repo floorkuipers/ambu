@@ -29,8 +29,8 @@ class WalkthroughState extends State<Walkthrough>
     // TODO: implement initState
     super.initState();
     animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    animation = Tween(begin: -250.0, end: 0.0).animate(
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    animation = Tween(begin: 0.0, end: 0.0).animate(
         CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
 
     animation.addListener(() => setState(() {}));

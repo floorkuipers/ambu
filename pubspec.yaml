@@ -48,6 +48,7 @@ dependencies:
   json_annotation: ^4.5.0
   shared_preferences: ^0.5.4+6
   firebase_database: ^9.0.15
+  url_launcher: ^6.1.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -97,6 +98,10 @@ flutter:
      - videos/Doczero3.mp4
      - videos/Doczero4.mp4
      - videos/Trauma Situatie A.mp4
+     - videos/UitgebreideNoodconiotomie1.mp4
+     - videos/UitgebreideNoodconiotomie2.mp4
+     - videos/UitgebreideNoodconiotomie3.mp4
+     - videos/UitgebreideNoodconiotomie4.mp4
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
