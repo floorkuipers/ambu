@@ -113,7 +113,7 @@ class _trainingState extends State<training> {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) =>
-                                  _buildPopupDialog(context),
+                                  buildPopupDialog(context),
                             );
                           }
                         }),
@@ -124,7 +124,7 @@ class _trainingState extends State<training> {
   }
 
 
-Widget _buildPopupDialog(BuildContext context) {
+Widget buildPopupDialog(BuildContext context) {
   return new AlertDialog(
     title: const Text('Niet beschikbaar'),
     content: new Column(

@@ -54,7 +54,8 @@ question2(BuildContext context, String topic)  {
                   }
                     Navigator.pop(context);
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => videoPlayerScreen(topic)));
+                        builder: emptyVideo(topic)?(BuildContext context) => training(data.category):(BuildContext context) => videoPlayerScreen(topic)));
+
                  // }
                 },
                 child: Text(
@@ -84,9 +85,7 @@ question2(BuildContext context, String topic)  {
               ),
             ],
          ):
-          //TODO insert alertdialog for final question
           _lastVideo(context, topic);
-
       });
 }
 

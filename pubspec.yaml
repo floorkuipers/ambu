@@ -98,10 +98,10 @@ flutter:
      - videos/Doczero3.mp4
      - videos/Doczero4.mp4
      - videos/Trauma Situatie A.mp4
-     - videos/UitgebreideNoodconiotomie1.mp4
-     - videos/UitgebreideNoodconiotomie2.mp4
-     - videos/UitgebreideNoodconiotomie3.mp4
-     - videos/UitgebreideNoodconiotomie4.mp4
+     - videos/Uitgebreide_noodconiotomie1.mp4
+     - videos/Uitgebreide_noodconiotomie2.mp4
+     - videos/Uitgebreide_noodconiotomie3.mp4
+     - videos/Uitgebreide_noodconiotomie4.mp4
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

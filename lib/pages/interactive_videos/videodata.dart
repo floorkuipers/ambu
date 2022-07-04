@@ -107,14 +107,17 @@ class dataset with ChangeNotifier {
     MyExcelTable('Coniotomie', 'Doczero2', 'Palperen', 'Na het palperen van de adamsappel met de wijsvinger beweeg je de vinger tot het ...', 'Cricothyroid membraan', 'Ringkraakbeen', 'Trachea', 'Answer1', false, true, 0),
     MyExcelTable('Coniotomie', 'Doczero3', 'Hoek', 'Onder welke hoek wordt de naald aangeprikt?', '75°', '45°', '30°', 'Answer3', false, true, 0),
     MyExcelTable('Coniotomie', 'Doczero4', '', '', '', '', '', '', true, true,0),
-    MyExcelTable("Coniotomie", "Trauma Situatie A1", 'test', 'test', 'test', 'test', '', 'test', false, true,0),
-    MyExcelTable("Coniotomie", "UitgebreideNoodconiotomie1", 'Inbrengrichting', 'Moet de naald naar boven of beneden gericht worden bij het inbrengen?', 'Naar boven', 'Naar beneden', '', 'Answer2', false, true,0),
-    MyExcelTable("Coniotomie", "UitgebreideNoodconiotomie2", 'Diep genoeg', 'Hoe weet je dat je de naald diep genoeg ingebracht hebt?', 'Je voelt weerstand', 'Er komt lucht in de naald', 'De naald zit 2cm diep', 'Answer2', false, true,0),
-    MyExcelTable("Coniotomie", "UitgebreideNoodconiotomie3", 'Verwijderen', 'Waar moet je op letten bij het verwijderen van de  naald?', 'Katheter op zijn plek houden', 'De naald op 45° houden', '', 'Answer1', false, true,0),
-    MyExcelTable("Coniotomie", "UitgebreideNoodconiotomie4", '', '', '', '', '', '', true, true,0),
+    MyExcelTable("Coniotomie", "Trauma Situatie A1",'Foutmelding', 'Er ging iets fout.', '', 'Sluiten', '', 'no', false, true,0),
+    MyExcelTable("Coniotomie", "Uitgebreide_noodconiotomie1", 'Inbrengrichting', 'Moet de naald naar boven of beneden gericht worden bij het inbrengen?', 'Naar boven', 'Naar beneden', '', 'Answer2', false, true,0),
+    MyExcelTable("Coniotomie", "Uitgebreide_noodconiotomie2", 'Diep genoeg', 'Hoe weet je dat je de naald diep genoeg ingebracht hebt?', 'Je voelt weerstand', 'Er komt lucht in de naald', 'De naald zit 2cm diep', 'Answer2', false, true,0),
+    MyExcelTable("Coniotomie", "Uitgebreide_noodconiotomie3", 'Verwijderen', 'Waar moet je op letten bij het verwijderen van de  naald?', 'Katheter op zijn plek houden', 'De naald op 45° houden', '', 'Answer1', false, true,0),
+    MyExcelTable("Coniotomie", "Uitgebreide_noodconiotomie4", '', '', '', '', '', '', true, true,0),
   ];
 
   void correctAnswer(topic) {
+    if(topic.contains(' ')){
+      topic = topic.replaceAll(' ','_');
+    }
     for (var j = 0; j < data.length; j++) {
       if (data[j].video.contains(topic)) {
         data[j].score = 1;
@@ -123,6 +126,9 @@ class dataset with ChangeNotifier {
   }
 
   void resetAnswers(topic) {
+    if(topic.contains(' ')){
+      topic = topic.replaceAll(' ','_');
+    }
     for (var j = 0; j < data.length; j++) {
       if (data[j].video.contains(topic)) {
         data[j].score = 0;
@@ -131,6 +137,9 @@ class dataset with ChangeNotifier {
   }
 
   void viewedVideo(topic) {
+    if(topic.contains(' ')){
+      topic = topic.replaceAll(' ','_');
+    }
     for (var j = 0; j < data.length; j++) {
       if (data[j].video.contains(topic)) {
         data[j].newVideo = false;
@@ -140,6 +149,9 @@ class dataset with ChangeNotifier {
 
   bool nieuw(topic) {
     bool nieuw = false;
+    if(topic.contains(' ')){
+      topic = topic.replaceAll(' ','_');
+    }
     for (var j = 0; j < data.length; j++) {
       if (data[j].video.contains(topic) &&
           data[j].video.contains('1') &&
@@ -152,11 +164,15 @@ class dataset with ChangeNotifier {
 }
 
 MyExcelTable returnData(String topic) {
+  String temp;
   MyExcelTable output = MyExcelTable(
-      'test', 'test', 'test', 'test', 'test', 'test', '', 'test', false, true,0);
+      'Foutmelding', 'Foutmelding', 'Foutmelding', 'Er ging iets fout.', '', 'Sluiten', '', 'no', false, true,0);
+  if(topic.contains(' ')){
+    topic = topic.replaceAll(' ','_');
+  }
   for (var i = 0; i < data.length; i++) {
-    if (data[i].video == topic) {
-      output = data[i];
+    if (data[i].video.contains(topic)) {
+        output = data[i];
     }
   }
   return output;
@@ -164,9 +180,15 @@ MyExcelTable returnData(String topic) {
 
 List returnTopic(category) {
   List outputTopic = [];
+  String temp = '';
   for (var j = 0; j < data.length; j++) {
     if (data[j].video.contains('1') && data[j].category == category) {
-      outputTopic.add(data[j].video.replaceAll(RegExp(r'[0-9]'), ''));
+      temp = data[j].video.replaceAll(RegExp(r'[0-9]'), '');
+      //for(var i =1; i<temp.length;i++){
+      temp = temp.replaceAll(RegExp(r'[_]'),' ');
+      temp.toLowerCase();
+      // }
+      outputTopic.add(temp);
     }
   }
   return outputTopic;
@@ -184,6 +206,9 @@ List returnVid(category) {
 }
 Future<Duration> calcDur(String topic) async {
   Duration duration = Duration(seconds: 0);
+  if(topic.contains(' ')){
+    topic = topic.replaceAll(' ','_');
+  }
   for (var i = 0; i < data.length; i++) {
     if (data[i].video.contains(topic)) {
       String path = data[i].video;
@@ -207,21 +232,25 @@ String printDuration(String topic) {
   return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
 }
 
-int topicAmount(String topic) {
-  int amount = 0;
-  for (var j = 0; j < data.length; j++) {
-    if (data[j].category.contains(topic)) {
-      amount++;
-    }
-  }
-  return amount - 1;
-}
+// int topicAmount(String topic) {
+//   int amount = 0;
+//   for (var j = 0; j < data.length; j++) {
+//     if (data[j].category.contains(topic)) {
+//       amount++;
+//     }
+//   }
+//   return amount - 1;
+// }
 
 //total amount of questions available per topic
 int totalAmount(List topic) {
+
   int amount = 0;
   for (var j = 0; j < data.length; j++) {
     for (var i = 0; i < topic.length; i++) {
+      if(topic[i].contains(' ')){
+        topic[i] = topic[i].replaceAll(' ','_');
+      }
       if (data[j].video.contains(topic[i])&&data[j].end ==false) {
         amount++;
       }
@@ -237,6 +266,9 @@ int totalScore(List topic) {
   int temp;
   for (var j = 0; j < data.length; j++) {
     for (var i = 0; i < topic.length; i++) {
+      if(topic[i].contains(' ')){
+        topic[i] = topic[i].replaceAll(' ','_');
+      }
       if (data[j].video.contains(topic[i]) && data[j].newVideo == false&&data[j].end==false) {
         temp = data[j].score.toInt();
         score += temp;
@@ -251,6 +283,9 @@ int getProgress(List topic) {
   int progress = 0;
   for (var i = 0; i < topic.length; i++) {
     for (var j = 0; j < data.length; j++) {
+      if(topic[i].contains(' ')){
+        topic[i] = topic[i].replaceAll(' ','_');
+      }
       if (data[j].video.contains(topic[i])) {
         if (data[j].newVideo == false&&data[j].end ==false) {
           progress += 1;
@@ -263,10 +298,12 @@ int getProgress(List topic) {
 
 bool emptyVideo(topic) {
   bool empty = false;
+  if(topic.contains(' ')){
+    topic = topic.replaceAll(' ','_');
+  }
   for (var j = 0; j < data.length; j++) {
     if (data[j].video.contains(topic) && data[j].video.contains('1')) {
-      print(data[j].video);
-      if (data[j].question.contains('test')) {
+      if (data[j].questionTitle.contains('Foutmelding')) {
         empty = true;
       }
     }

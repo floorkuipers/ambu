@@ -11,24 +11,27 @@ import 'question2.dart';
 
 bool videoPlayer = false;
 
-
 class videoPlayerScreen extends StatefulWidget {
   String topic;
+
   videoPlayerScreen(this.topic);
 
   @override
   _videoPlayerScreenState createState() => _videoPlayerScreenState();
 }
 
-class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindingObserver{
- // bool videoPlayer = false;
+class _videoPlayerScreenState extends State<videoPlayerScreen>
+    with WidgetsBindingObserver {
+  // bool videoPlayer = false;
   AppLifecycleState? _notification;
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     setState(() {
       _notification = state;
     });
   }
+
   @override
   void initState() {
     data();
@@ -47,14 +50,15 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
   bool _isPlaying = false;
   Duration _duration = Duration(seconds: 0);
   Duration _position = Duration(seconds: 0);
-  dynamic _video= 'temporary';
+  dynamic _video = 'temporary';
   String topic = 'temporary';
   bool playing = videodata.playing;
   int counter = videodata.counter;
   String text = '0';
   final dataset dataSet = new dataset();
   bool test = false;
-  void data(){
+
+  void data() {
     topic = widget.topic;
 
     MyExcelTable data = returnData('$topic$counter');
@@ -96,29 +100,26 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
         //     });
         //   }
 
-
-        if(
-        _duration.compareTo(_position) == 0){
+        if (_duration.compareTo(_position) == 0) {
           this.setState(() {
             _isEnd = true;
           });
-          if(videoPlayer && _notification==null){
+          if (videoPlayer && _notification == null) {
             dataSet.viewedVideo("$topic$counter");
             question2(context, topic);
             this.setState(() {
-            videoPlayer=false;
+              videoPlayer = false;
             });
           }
-         }
+        }
 
-        if(_notification != null){
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => Homepage()));
+        if (_notification != null) {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (BuildContext context) => Homepage()));
         }
       })
       ..initialize().then((value) => controller.play());
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +128,9 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
     videoPlayer = true;
     final double _width = MediaQuery.of(context).size.width;
     final double _height = MediaQuery.of(context).size.height;
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     print(_notification);
-      return
-     Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFFFFFFFF),
           elevation: 0.0,
@@ -137,76 +138,88 @@ class _videoPlayerScreenState extends State<videoPlayerScreen> with WidgetsBindi
           leading: GestureDetector(
             onTap: () async {
               controller.pause();
-              videodata.counter=1;
-              videoPlayer=false;
+              videodata.counter = 1;
+              videoPlayer = false;
               for (var j = 0; j < actualData.length; j++) {
-                await DatabaseService(uid: user.uid).initialUpload(actualData[j]);
+                await DatabaseService(uid: user.uid)
+                    .initialUpload(actualData[j]);
               }
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => Homepage()));},
+                  builder: (BuildContext context) => Homepage()));
+            },
             child: Icon(
-              Icons.home,  // add custom icons also
+              Icons.home, // add custom icons also
             ),
           ),
         ),
-    body: Stack(
-      children: [
-        Scaffold(
-          body: Column(children: [
-            Align(
-              alignment: Alignment.topRight,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Score: '+ totalScore([topic]).toString(),
-                      style: TextStyle(fontSize: 20),
-                    )
-                ),
-            ),
+        body: Center(
+          child: Stack(
+            children: [
+              Scaffold(
+                  body: Stack(
+                    //  fit: isPortrait? StackFit.expand: StackFit.loose,
+                      children: [
+                Center(
+                  child: Container(
+                  //width: isPortrait? _height:_width,
 
-            Container(
-                    width: _width < _height ? _width : _height,
+                    //  width:_width,
+                    // width: _width < _height ? _width : _height,
                     child: AspectRatio(
                       aspectRatio: controller.value.aspectRatio,
                       child: VideoPlayer(controller),
                     ),
                   ),
-                  Container(
-                    child: Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              if (!controller.value.isPlaying) {
-                                videodata.playing = true;
-                                controller.play();
-                              } else {
-                                controller.pause();
-                              }
-                              setState(() {});
-                            },
-                            icon: Icon(controller.value.isPlaying
-                                ? Icons.pause
-                                : Icons.play_arrow)),
-                        IconButton(
-                            onPressed: () {
-                              controller.seekTo(Duration(seconds: 0));
-
-                              setState(() {
-                                videodata.counter = 1;
-                                MyExcelTable data = returnData('$topic$counter');
-                                _video = data.video;
-                                controller = VideoPlayerController.asset(
-                                  "videos/$_video.mp4",
-                                );
-                              });
-                            },
-                            icon: Icon(Icons.stop)),
-                      ],
+                ),
+                Positioned(
+                  bottom: 20.0,
+                  right: 10.0,
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Score: ' + totalScore([topic]).toString(),
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
-                ])
-        ),
-      ],
-    ));
+                ),
+                Positioned(
+                  bottom: 20,
+                  left: 1,
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            if (!controller.value.isPlaying) {
+                              videodata.playing = true;
+                              controller.play();
+                            } else {
+                              controller.pause();
+                            }
+                            setState(() {});
+                          },
+                          icon: Icon(controller.value.isPlaying
+                              ? Icons.pause
+                              : Icons.play_arrow)),
+                      IconButton(
+                          onPressed: () {
+                            controller.seekTo(Duration(seconds: 0));
+
+                            setState(() {
+                              videodata.counter = 1;
+                              MyExcelTable data = returnData('$topic$counter');
+                              _video = data.video;
+                              controller = VideoPlayerController.asset(
+                                "videos/$_video.mp4",
+                              );
+                            });
+                          },
+                          icon: Icon(Icons.stop)),
+                    ],
+                  ),
+                ),
+              ])),
+            ],
+          ),
+        ));
   }
 }

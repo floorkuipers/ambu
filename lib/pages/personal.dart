@@ -14,10 +14,10 @@ import '../services/database.dart';
 import '../shared/constants.dart';
 import 'interactive_videos/videodata.dart';
 
-final Stream<DocumentSnapshot> _usersStream = FirebaseFirestore.instance
-    .collection("Users")
-    .doc(FirebaseAuth.instance.currentUser?.uid)
-    .snapshots();
+// final Stream<DocumentSnapshot> _usersStream = FirebaseFirestore.instance
+//     .collection("Users")
+//     .doc(FirebaseAuth.instance.currentUser?.uid)
+//     .snapshots();
 
 class personal extends StatefulWidget {
   const personal({Key? key}) : super(key: key);
