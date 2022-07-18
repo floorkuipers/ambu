@@ -107,8 +107,7 @@ class _HomepageState extends State<Homepage>{
                     onPressed: () { },
                   ),
                   Text(
-                    //TODO titel app
-                    'Ambu app',
+                    'IVEA',
                     style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ],

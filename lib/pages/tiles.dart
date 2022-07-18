@@ -47,7 +47,6 @@ class _tilesState extends State<tiles> {
                 );
               }
               else{
-                //TODO redirect to learning page
                 String category = widget.title;
                 Navigator.push(
                   context,

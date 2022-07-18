@@ -102,6 +102,11 @@ flutter:
      - videos/Uitgebreide_noodconiotomie2.mp4
      - videos/Uitgebreide_noodconiotomie3.mp4
      - videos/Uitgebreide_noodconiotomie4.mp4
+     - videos/Oefenfantoom1.mp4
+     - videos/Oefenfantoom2.mp4
+     - videos/Oefenfantoom3.mp4
+     - videos/Oefenfantoom4.mp4
+     - videos/Oefenfantoom5.mp4
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

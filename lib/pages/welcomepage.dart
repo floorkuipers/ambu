@@ -48,7 +48,20 @@ class IntroScreenState extends State<IntroScreen> {
                   children: <Widget>[
                     Expanded(
                       flex: 1,
-                      child: Container(),
+                      child: Container(
+                        child: Center(child: Row(
+                          children: [
+                            Image.asset(
+                              'images/app_logo.png',
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            SizedBox(width: 10.0),
+                            Text('IVEA', style: TextStyle(fontSize: 25, color: AppTheme.colors.primaryColor, fontWeight: FontWeight.bold),)
+                          ],
+                        )),
+                      ),
                     ),
                     Expanded(
                       flex: 4,

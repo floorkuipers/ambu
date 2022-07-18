@@ -76,8 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           padding: EdgeInsets.only(top: 10.0),
                         ),
                         Text(
-                          //TODO: insert appname here
-                         "Ambu",
+                         "IVEA",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -97,7 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         padding: EdgeInsets.only(top: 20.0),
                       ),
                       Text(
-                        'Hou moeiteloos je kennis up-to-date!',
+                        'Interactieve Video Educatie Ambulance',
                         softWrap: true,
                         textAlign: TextAlign.center,
                         style: TextStyle(

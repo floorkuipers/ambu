@@ -26,7 +26,6 @@ class WalkthroughState extends State<Walkthrough>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
@@ -40,7 +39,6 @@ class WalkthroughState extends State<Walkthrough>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     animationController.dispose();
   }
