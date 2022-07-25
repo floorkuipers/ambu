@@ -6,6 +6,7 @@ import 'package:ambu/theme/app_theme.dart';
 import 'package:ambu/pages/homepage.dart';
 import '../../models/user.dart';
 import '../../services/database.dart';
+import '../wrapper.dart';
 import 'videodata.dart';
 import 'question2.dart';
 
@@ -115,7 +116,7 @@ class _videoPlayerScreenState extends State<videoPlayerScreen>
 
         if (_notification != null) {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (BuildContext context) => Homepage()));
+              MaterialPageRoute(builder: (BuildContext context) => Wrapper()));
         }
       })
       ..initialize().then((value) => controller.play());
@@ -145,7 +146,7 @@ class _videoPlayerScreenState extends State<videoPlayerScreen>
                     .initialUpload(actualData[j]);
               }
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => Homepage()));
+                  builder: (BuildContext context) => Wrapper()));
             },
             child: Icon(
               Icons.home, // add custom icons also

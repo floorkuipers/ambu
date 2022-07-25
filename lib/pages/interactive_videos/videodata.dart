@@ -107,7 +107,6 @@ class dataset with ChangeNotifier {
     MyExcelTable('Coniotomie', 'Doczero2', 'Palperen', 'Na het palperen van de adamsappel met de wijsvinger beweeg je de vinger tot het ...', 'Cricothyroid membraan', 'Ringkraakbeen', 'Trachea', 'Answer1', false, true, 0),
     MyExcelTable('Coniotomie', 'Doczero3', 'Hoek', 'Onder welke hoek wordt de naald aangeprikt?', '75°', '45°', '30°', 'Answer3', false, true, 0),
     MyExcelTable('Coniotomie', 'Doczero4', '', '', '', '', '', '', true, true,0),
-    MyExcelTable("Coniotomie", "Trauma Situatie A1",'Foutmelding', 'Er ging iets fout.', '', 'Sluiten', '', 'no', false, true,0),
     MyExcelTable("Coniotomie", "Uitgebreide_noodconiotomie1", 'Inbrengrichting', 'Moet de naald naar boven of beneden gericht worden bij het inbrengen?', 'Naar boven', 'Naar beneden', '', 'Answer2', false, true,0),
     MyExcelTable("Coniotomie", "Uitgebreide_noodconiotomie2", 'Diep genoeg', 'Hoe weet je dat je de naald diep genoeg ingebracht hebt?', 'Je voelt weerstand', 'Er komt lucht in de naald', 'De naald zit 2cm diep', 'Answer2', false, true,0),
     MyExcelTable("Coniotomie", "Uitgebreide_noodconiotomie3", 'Verwijderen', 'Waar moet je op letten bij het verwijderen van de  naald?', 'Katheter op zijn plek houden', 'De naald op 45° houden', '', 'Answer1', false, true,0),

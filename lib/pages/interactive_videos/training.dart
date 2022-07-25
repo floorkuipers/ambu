@@ -5,6 +5,7 @@ import 'package:ambu/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import '../../shared/loading.dart';
 import '../homepage.dart';
+import '../wrapper.dart';
 import 'videodata.dart';
 import 'videoPlayerScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,7 +46,7 @@ class _trainingState extends State<training> {
                   ),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => Homepage()));
+                        builder: (BuildContext context) => Wrapper()));
                     },
                 ),
                   ]),
