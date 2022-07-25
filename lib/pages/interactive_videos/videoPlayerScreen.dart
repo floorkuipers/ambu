@@ -108,7 +108,7 @@ class _videoPlayerScreenState extends State<videoPlayerScreen>
           if (videoPlayer && _notification == null) {
             dataSet.viewedVideo("$topic$counter");
             question2(context, topic);
-            this.setState(() {
+            if (mounted) this.setState(() {
               videoPlayer = false;
             });
           }

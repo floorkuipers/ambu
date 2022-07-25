@@ -46,7 +46,7 @@ class WalkthroughState extends State<Walkthrough>
   @override
   Widget build(BuildContext context) {
     return new Container(
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(15.0),
       child: Material(
         animationDuration: Duration(milliseconds: 500),
         elevation: 2.0,
