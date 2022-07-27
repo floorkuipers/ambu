@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ambu/theme/app_theme.dart';
+import 'package:IVEA/theme/app_theme.dart';
 
 class Loading extends StatelessWidget {
   @override

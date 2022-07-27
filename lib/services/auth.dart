@@ -1,8 +1,8 @@
-import 'package:ambu/theme/app_theme.dart';
+import 'package:IVEA/theme/app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ambu/models/user.dart';
-import 'package:ambu/services/database.dart';
-import 'package:ambu/pages/interactive_videos/videodata.dart';
+import 'package:IVEA/models/user.dart';
+import 'package:IVEA/services/database.dart';
+import 'package:IVEA/pages/interactive_videos/videodata.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/authenticate/authenticate.dart';

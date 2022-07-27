@@ -1,5 +1,5 @@
-import 'package:ambu/pages/authenticate/register.dart';
-import 'package:ambu/pages/authenticate/sign_in.dart';
+import 'package:IVEA/pages/authenticate/register.dart';
+import 'package:IVEA/pages/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {

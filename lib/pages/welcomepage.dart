@@ -1,7 +1,7 @@
-import 'package:ambu/pages/walkthrough.dart';
-import 'package:ambu/pages/wrapper.dart';
+import 'package:IVEA/pages/walkthrough.dart';
+import 'package:IVEA/pages/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:ambu/models/appInfo.dart';
+import 'package:IVEA/models/appInfo.dart';
 import '../theme/app_theme.dart';
 import 'authenticate/authenticate.dart';
 

@@ -1,6 +1,6 @@
-import 'package:ambu/models/user.dart';
-import 'package:ambu/pages/authenticate/authenticate.dart';
-import 'package:ambu/pages/homepage.dart';
+import 'package:IVEA/models/user.dart';
+import 'package:IVEA/pages/authenticate/authenticate.dart';
+import 'package:IVEA/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

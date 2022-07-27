@@ -1,7 +1,7 @@
-import 'package:ambu/models/scores.dart';
+import 'package:IVEA/models/scores.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ambu/theme/app_theme.dart';
+import 'package:IVEA/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import '../../shared/loading.dart';
 import '../homepage.dart';
@@ -9,8 +9,8 @@ import '../wrapper.dart';
 import 'videodata.dart';
 import 'videoPlayerScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ambu/models/user.dart';
-import 'package:ambu/services/database.dart';
+import 'package:IVEA/models/user.dart';
+import 'package:IVEA/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 

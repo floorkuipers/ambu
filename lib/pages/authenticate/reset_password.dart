@@ -1,9 +1,9 @@
-import 'package:ambu/services/auth.dart';
-import 'package:ambu/shared/constants.dart';
-import 'package:ambu/shared/loading.dart';
+import 'package:IVEA/services/auth.dart';
+import 'package:IVEA/shared/constants.dart';
+import 'package:IVEA/shared/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:ambu/theme/app_theme.dart';
-import 'package:ambu/pages/wrapper.dart';
+import 'package:IVEA/theme/app_theme.dart';
+import 'package:IVEA/pages/wrapper.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/database.dart';

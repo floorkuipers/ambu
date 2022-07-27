@@ -1,12 +1,12 @@
-import 'package:ambu/pages/sources.dart';
-import 'package:ambu/pages/welcomepage.dart';
+import 'package:IVEA/pages/sources.dart';
+import 'package:IVEA/pages/welcomepage.dart';
 import 'package:flutter/material.dart';
 import 'ontdekken.dart';
 import 'placeholder_widget.dart';
-import 'package:ambu/theme/app_theme.dart';
+import 'package:IVEA/theme/app_theme.dart';
 import 'authenticate/authenticate.dart';
-import 'package:ambu/services/auth.dart';
-import 'package:ambu/pages/personal.dart';
+import 'package:IVEA/services/auth.dart';
+import 'package:IVEA/pages/personal.dart';
 
 class Homepage extends StatefulWidget {
   //final String title;

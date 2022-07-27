@@ -1,12 +1,12 @@
-import 'package:ambu/pages/interactive_videos/training.dart';
-import 'package:ambu/pages/interactive_videos/videoPlayerScreen.dart';
+import 'package:IVEA/pages/interactive_videos/training.dart';
+import 'package:IVEA/pages/interactive_videos/videoPlayerScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/user.dart';
 import '../../services/database.dart';
 import 'videodata.dart';
-import 'package:ambu/theme/app_theme.dart';
-import 'package:ambu/pages/homepage.dart';
+import 'package:IVEA/theme/app_theme.dart';
+import 'package:IVEA/pages/homepage.dart';
 
 
 question2(BuildContext context, String topic)  {

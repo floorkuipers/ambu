@@ -1,18 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'package:ambu/pages/authenticate/register.dart';
-import 'package:ambu/pages/interactive_videos/training.dart';
+import 'package:IVEA/pages/authenticate/register.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ambu/theme/app_theme.dart';
-import 'package:ambu/pages/authenticate/sign_in.dart';
+import 'package:IVEA/theme/app_theme.dart';
 import 'package:provider/provider.dart';
-import '../models/brew.dart';
 import '../models/user.dart';
 import '../services/database.dart';
 import '../shared/constants.dart';
-import 'interactive_videos/videodata.dart';
 
 // final Stream<DocumentSnapshot> _usersStream = FirebaseFirestore.instance
 //     .collection("Users")

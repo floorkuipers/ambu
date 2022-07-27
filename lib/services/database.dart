@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:ambu/models/scores.dart';
-import 'package:ambu/pages/interactive_videos/videodata.dart';
+import 'package:IVEA/models/scores.dart';
+import 'package:IVEA/pages/interactive_videos/videodata.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:ambu/models/brew.dart';
-import 'package:ambu/models/user.dart';
+import 'package:IVEA/models/brew.dart';
+import 'package:IVEA/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:json_annotation/json_annotation.dart';

@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:ambu/pages/walkthrough.dart';
-import 'package:ambu/pages/welcomepage.dart';
-import 'package:ambu/pages/wrapper.dart';
+import 'package:IVEA/pages/walkthrough.dart';
+import 'package:IVEA/pages/welcomepage.dart';
+import 'package:IVEA/pages/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../shared/loading.dart';
-import 'package:ambu/theme/app_theme.dart';
-import 'package:ambu/pages/walkthrough.dart';
+import 'package:IVEA/theme/app_theme.dart';
+import 'package:IVEA/pages/walkthrough.dart';
 import 'interactive_videos/training.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:ambu/theme/colors.dart';
+import 'package:IVEA/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme{

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
-import 'package:ambu/theme/app_theme.dart';
+import 'package:IVEA/theme/app_theme.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:ambu/pages/interactive_videos/training.dart';
+import 'package:IVEA/pages/interactive_videos/training.dart';
 
 class tiles extends StatefulWidget {
   final String title;

@@ -1,7 +1,7 @@
-import 'package:ambu/pages/interactive_videos/videoPlayerScreen.dart';
+import 'package:IVEA/pages/interactive_videos/videoPlayerScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:ambu/pages/interactive_videos/videodata.dart';
-import 'package:ambu/theme/app_theme.dart';
+import 'package:IVEA/pages/interactive_videos/videodata.dart';
+import 'package:IVEA/theme/app_theme.dart';
 
 class question extends StatefulWidget {
   String topic;
